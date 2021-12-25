@@ -24,7 +24,7 @@ const NewExpense = (props) => {
     return (
         <Card className="new-expense">
             {!isEditingForm && <button type="button" onClick={toggleFormEditing} >Add New Expense</button>}
-            <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} toggleExpenseFormDisplay={toggleFormEditing} />
+            {isEditingForm && <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} toggleExpenseFormDisplay={toggleFormEditing} />}
         </Card>
     )
 }
