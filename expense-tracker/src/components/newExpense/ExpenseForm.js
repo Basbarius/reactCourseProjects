@@ -8,7 +8,6 @@ const ExpenseForm = (props) => {
         enteredAmount: '',
         enteredDate: ''
     })
-    const [isExpenseFormDisplayed, setIsExpenseFormDisplayed] = useState(false);
 
     const inputChangeHandler = (event) => {
         setUserInput((prevState) =>{
@@ -34,17 +33,7 @@ const ExpenseForm = (props) => {
             enteredAmount: '',
             enteredDate: ''
         });
-        toggleExpenseFormDisplay();
-    }
-
-    const toggleExpenseFormDisplay = () => {
-        setIsExpenseFormDisplayed(prevState => {
-            return !prevState;
-        });
-    }
-
-    if(!isExpenseFormDisplayed){
-        return <button onClick={toggleExpenseFormDisplay} >Add New Expense</button>
+        props.toggleExpenseFormDisplay();
     }
 
     return (
@@ -66,7 +55,7 @@ const ExpenseForm = (props) => {
                 </div>
             </div>
             <div className="new-expense_actions">
-                <button>Cancel</button>
+                <button onClick={props.toggleExpenseFormDisplay}>Cancel</button>
                 <button type="submit">Add Expense</button>
             </div>
         </form>

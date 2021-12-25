@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Card from '../ui/Card'
 import ExpenseForm from './ExpenseForm'
@@ -13,10 +13,18 @@ const NewExpense = (props) => {
         };
         props.onAddExpense(expenseData);
     };
+    const [isEditingForm, setIsEditingForm] = useState(false);
+
+    const toggleFormEditing = () => {
+        setIsEditingForm(prevState => {
+            return !prevState;
+        });
+    }
 
     return (
         <Card className="new-expense">
-            <ExpenseForm onSaveExpenseData={saveExpenseDataHandler}/>
+            {!isEditingForm && <button type="button" onClick={toggleFormEditing} >Add New Expense</button>}
+            <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} toggleExpenseFormDisplay={toggleFormEditing} />
         </Card>
     )
 }
