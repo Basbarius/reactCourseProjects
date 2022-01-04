@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div className="App">
-      <AddUser addNewUser={addNewUser}/>
+      <AddUser onAddUser={addNewUser}/>
       {content}
     </div>
   );

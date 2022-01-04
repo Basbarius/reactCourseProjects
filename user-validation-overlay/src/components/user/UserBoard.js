@@ -1,16 +1,19 @@
 import React from 'react'
 
-import User from './User'
+import Card from '../ui/Card'
+import styles from './UserBoard.module.css'
 
 const UserBoard = props => {
     return (
-        <div>
-            {
-                props.users.map(user => {
-                    return <User key={user.id} username={user.username} age={user.age}/>
-                })
-            }
-        </div>
+        <Card className={styles.users}>
+            <ul>
+                {
+                    props.users.map(user => {
+                        return <li key={user.id}>{`${user.username} (${user.age} years old)`}</li>
+                    })
+                }
+            </ul>
+        </Card>
     )
 }
 
