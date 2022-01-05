@@ -26,10 +26,10 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <>
       <AddUser onAddUser={addNewUser}/>
       {content}
-    </div>
+    </>
   );
 }
 
