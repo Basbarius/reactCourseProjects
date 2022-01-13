@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
 import Cart from "./components/Cart/Cart";
+import CartProvider from "./store/CartProvider";
 
 function App() {
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -16,13 +17,13 @@ function App() {
   }
 
   return (
-    <>
+    <CartProvider>
       {isCartOpen && <Cart closeCart={closeCart}/>}
       <Header openCart={openCart} />
       <main>
         <Meals />
       </main>
-    </>
+    </CartProvider>
   );
 }
 
