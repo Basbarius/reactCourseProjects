@@ -21,6 +21,11 @@ const Cart = props => {
     cartCtx.addItem(itemToAdd)
   };
 
+  const onCheckoutHandler = () => {
+    props.openCheckout();
+    props.closeCart();
+  }
+
   const cartItems = <ul className={styles['cart-items']}>{cartCtx.items.map(item => (
     <CartItem 
       key={item.id} 
@@ -41,7 +46,7 @@ const Cart = props => {
       </div>
       <div className={styles.actions}>
         <button className={styles['button--alt']} onClick={props.closeCart}>Close</button>
-        {hasItems && <button className={styles.button}>Order</button>}
+        {hasItems && <button className={styles.button} onClick={onCheckoutHandler}>Order</button>}
       </div>
     </Modal>
   )
