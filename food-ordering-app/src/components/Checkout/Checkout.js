@@ -1,14 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import useInput from "../../hooks/use-input";
-import useHttp from "../../hooks/use-http";
-import CartContext from "../../store/cart-context";
 
 import styles from "./Checkout.module.css";
-import Modal from "../UI/Modal";
 
 const Checkout = (props) => {
-  const cartCtx = useContext(CartContext);
-  const {makeRequest} = useHttp();
   const {
     value: inputName,
     isValid: inputNameIsValid,
@@ -55,76 +50,65 @@ const Checkout = (props) => {
       return;
     }
 
-    const body = {
-      items: cartCtx.items,
-      totalAmount: cartCtx.totalAmount,
+    const userData = {
       name: inputName,
       street: inputStreet,
       zipCode: inputZipCode,
       city: inputCity
     }
 
-    makeRequest({
-      url: 'https://react-practice-5c75e-default-rtdb.firebaseio.com/orders.json',
-      method: 'POST',
-      body,
-      headers: {'Content-Type': 'application/json'}
-    })
-
     inputNameReset();
     inputStreetReset();
     inputZipCodeReset();
     inputCityReset();
-    props.closeCheckout();
+    props.onSubmit(userData);
   };
 
   return (
-    <Modal closeModal={props.closeCheckout}>
-      <form className={styles.form} onSubmit={submitHandler}>
-        <div className={nameStyles}>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            value={inputName}
-            onChange={inputNameChangeHandler}
-            onBlur={inputNameBlurHandler}
-          />
-        </div>
-        <div className={streetStyles}>
-          <label htmlFor="name">Street</label>
-          <input
-            type="text"
-            value={inputStreet}
-            onChange={inputStreetChangeHandler}
-            onBlur={inputStreetBlurHandler}
-          />
-        </div>
-        <div className={zipCodeStyles}>
-          <label htmlFor="name">ZipCode</label>
-          <input
-            type="text"
-            value={inputZipCode}
-            onChange={inputZipCodeChangeHandler}
-            onBlur={inputZipCodeBlurHandler}
-          />
-        </div>
-        <div className={cityStyles}>
-          <label htmlFor="name">City</label>
-          <input
-            type="text"
-            value={inputCity}
-            onChange={inputCityChangeHandler}
-            onBlur={inputCityBlurHandler}
-          />
-        </div>
-        <div className={styles.actions}>
-          <button onClick={props.closeCheckout}>Cancel</button>
-          <button type="submit" className={styles.submit} disabled={!formIsValid}>
-            Pay
-          </button>
-        </div>
-      </form>
-    </Modal>
+    <form className={styles.form} onSubmit={submitHandler}>
+      <div className={nameStyles}>
+        <label htmlFor="name">Name</label>
+        <input
+          type="text"
+          value={inputName}
+          onChange={inputNameChangeHandler}
+          onBlur={inputNameBlurHandler}
+        />
+      </div>
+      <div className={streetStyles}>
+        <label htmlFor="name">Street</label>
+        <input
+          type="text"
+          value={inputStreet}
+          onChange={inputStreetChangeHandler}
+          onBlur={inputStreetBlurHandler}
+        />
+      </div>
+      <div className={zipCodeStyles}>
+        <label htmlFor="name">ZipCode</label>
+        <input
+          type="text"
+          value={inputZipCode}
+          onChange={inputZipCodeChangeHandler}
+          onBlur={inputZipCodeBlurHandler}
+        />
+      </div>
+      <div className={cityStyles}>
+        <label htmlFor="name">City</label>
+        <input
+          type="text"
+          value={inputCity}
+          onChange={inputCityChangeHandler}
+          onBlur={inputCityBlurHandler}
+        />
+      </div>
+      <div className={styles.actions}>
+        <button onClick={props.closeCheckout}>Cancel</button>
+        <button type="submit" className={styles.submit} disabled={!formIsValid}>
+          Pay
+        </button>
+      </div>
+    </form>
   );
 };
 
