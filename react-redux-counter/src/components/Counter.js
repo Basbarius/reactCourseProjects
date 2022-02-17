@@ -3,7 +3,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 
 import classes from './Counter.module.css';
-import { counterActions } from '../store/index';
+import { counterActions } from '../store/reducers/counter';
 
 const Counter = () => {
   //here a function is passed which will tell what part of the store wants to be accessed to
